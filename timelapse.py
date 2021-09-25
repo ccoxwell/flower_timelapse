@@ -3,6 +3,7 @@ from time import sleep
 
 with PiCamera() as camera:
 	camera.resolution = (3280, 2464)
+	camera.meter_mode = 'matrix'
 	camera.iso = 100
 	# Wait for the automatic gain control to settle
 	sleep(2)
@@ -10,7 +11,6 @@ with PiCamera() as camera:
 	g = camera.awb_gains
 	camera.awb_mode = 'off'
 	camera.awb_gains = g
-	camera.exposure_compensation = -1
 	for filename in camera.capture_continuous('./photos/img{counter:04d}.jpg'):
 		print('Captured %s' % filename)
-		sleep(20)
+		sleep(3)
